@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factory Performance Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Factory Operations</p>
+          <h1>Performance Input & Data Log</h1>
+        </div>
+        <div class="header-actions">
+          <button id="downloadCsvBtn" class="ghost-btn">Export CSV</button>
+          <button id="clearLogBtn" class="danger-btn">Reset Log</button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <h2>Factory Input Form</h2>
+            <span class="badge success">Live</span>
+          </div>
+
+          <form id="factoryForm">
+            <div class="field-grid">
+              <label>
+                <span>Date</span>
+                <input type="date" name="date" required />
+              </label>
+
+              <label>
+                <span>Shift</span>
+                <select name="shift" required>
+                  <option value="">Select shift</option>
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                  <option>Night</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Production Line</span>
+                <select name="line" required>
+                  <option value="">Select line</option>
+                  <option>Line 1</option>
+                  <option>Line 2</option>
+                  <option>Line 3</option>
+                  <option>Packaging</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Operator</span>
+                <input type="text" name="operator" placeholder="Operator name" required />
+              </label>
+
+              <label>
+                <span>Product / SKU</span>
+                <input type="text" name="product" placeholder="Product name" required />
+              </label>
+
+              <label>
+                <span>Target Quantity</span>
+                <input type="number" name="targetQty" min="0" step="1" value="1000" required />
+              </label>
+
+              <label>
+                <span>Actual Quantity</span>
+                <input type="number" name="actualQty" min="0" step="1" value="950" required />
+              </label>
+
+              <label>
+                <span>Scrap Quantity</span>
+                <input type="number" name="scrapQty" min="0" step="1" value="20" required />
+              </label>
+
+              <label>
+                <span>Downtime (min)</span>
+                <input type="number" name="downtime" min="0" step="1" value="15" required />
+              </label>
+
+              <label>
+                <span>Hours Worked</span>
+                <input type="number" name="hoursWorked" min="0" step="0.5" value="8" required />
+              </label>
+
+              <label class="full-span">
+                <span>Remarks</span>
+                <textarea name="notes" rows="3" placeholder="Machine issue, delay, quality note, or general observation..."></textarea>
+              </label>
+            </div>
+
+            <div class="submit-row">
+              <button type="submit" class="primary-btn">Save Record</button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="panel summary-panel">
+          <div class="panel-header">
+            <h2>Performance Summary</h2>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card accent-blue">
+              <span>Total Records</span>
+              <strong id="totalEntries">0</strong>
+            </div>
+            <div class="stat-card accent-green">
+              <span>Total Output</span>
+              <strong id="totalOutput">0</strong>
+            </div>
+            <div class="stat-card accent-orange">
+              <span>Total Scrap</span>
+              <strong id="totalScrap">0</strong>
+            </div>
+            <div class="stat-card accent-purple">
+              <span>Efficiency</span>
+              <strong id="efficiencyRate">0%</strong>
+            </div>
+          </div>
+
+          <div class="mini-panel">
+            <h3>Quick Filters</h3>
+            <div class="filters">
+              <select id="filterShift">
+                <option value="all">All shifts</option>
+                <option>Morning</option>
+                <option>Afternoon</option>
+                <option>Night</option>
+              </select>
+
+              <select id="filterLine">
+                <option value="all">All lines</option>
+                <option>Line 1</option>
+                <option>Line 2</option>
+                <option>Line 3</option>
+                <option>Packaging</option>
+              </select>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <section class="panel table-panel">
+        <div class="panel-header">
+          <h2>Production Data Log</h2>
+          <div class="search-box">
+            <input id="searchInput" type="text" placeholder="Search product or operator" />
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Shift</th>
+                <th>Line</th>
+                <th>Operator</th>
+                <th>Product</th>
+                <th>Target</th>
+                <th>Actual</th>
+                <th>Scrap</th>
+                <th>Downtime</th>
+                <th>Efficiency</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="logTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
+
